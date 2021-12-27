@@ -117,8 +117,8 @@ def load_i3d_model(
         num_in_frames=num_in_frames,
         include_embds=True,
     )
-    model = torch.nn.DataParallel(model).cuda()
-    checkpoint = torch.load(i3d_checkpoint_path)
+    model = torch.nn.DataParallel(model)
+    checkpoint = torch.load(i3d_checkpoint_path, map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint["state_dict"])
     model.eval()
     return model
@@ -144,7 +144,7 @@ def load_mstcn_model(
     )
 
     model = model.to(device)
-    checkpoint = torch.load(mstcn_checkpoint_path)
+    checkpoint = torch.load(mstcn_checkpoint_path, map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint)
     model.eval()
     return model
@@ -304,7 +304,7 @@ def main_mstcn(
 
     if generate_vtt:
         print("Generate .vtt file")
-        generate_vtt_file(all_preds, logits, save_path)
+        generate_vtt_file(all_preds, logits, save_path, video_path)
 
     if viz:
         if starting_point=="feature":

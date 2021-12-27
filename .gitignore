@@ -12,8 +12,11 @@ __pycache__/
 .DS_Store
 ._*
 .vscode/
+data/
+models/
 
 
 !demo/sample_data/demo_video.mp4
 !demo/results/demo.mp4
+!data/README.md
 

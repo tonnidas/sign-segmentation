@@ -155,7 +155,7 @@ def get_labels_start_end_time(frame_wise_labels, bg_class=["Sign"]):
         ends.append(i + 1)
     return labels, starts, ends
 
-def generate_vtt_file(all_preds, logits, save_path):
+def generate_vtt_file(all_preds, logits, save_path, video_path):
     vtt = WebVTT()
     predictions = all_preds
 
@@ -211,6 +211,5 @@ def generate_vtt_file(all_preds, logits, save_path):
 
 
     # save to a different file
-    vtt.save(f'{save_path}/demo.vtt')
-
-    
+    # vtt.save(f'{save_path}/demo.vtt')
+    vtt.save(f'{save_path}/{video_path.stem}_result.vtt')
